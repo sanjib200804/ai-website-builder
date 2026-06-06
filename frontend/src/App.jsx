@@ -8,31 +8,49 @@ import Generate from './pages/Generate'
 import Editor from './pages/Editor'
 import { Toaster } from 'react-hot-toast'
 
+// High-quality engineering practice: Abstract protection logic
+const ProtectedRoute = ({ isAllowed, children }) => {
+  if (!isAllowed) {
+    return <Navigate to='/' replace />
+  }
+  return children
+}
+
 const App = () => {
   useGetCurrentUser()
   const { userData } = useSelector(state => state.user)
+
   return (
     <BrowserRouter>
       <Toaster position='top-right' reverseOrder={false} />
       <Routes>
-        {/* If logged in, visiting the root should take you to the dashboard */}
-        <Route
-          path='/'
-          element={userData ? <Navigate to='/dashboard' replace /> : <Home />}
-        />
+        {/* Public Route: Always accessible */}
+        <Route path='/' element={<Home />} />
 
+        {/* Private Routes: Wrapped for clarity */}
         <Route
           path='/dashboard'
-          element={userData ? <DashBoard /> : <Navigate to='/' replace />}
+          element={
+            <ProtectedRoute isAllowed={!!userData}>
+              <DashBoard />
+            </ProtectedRoute>
+          }
         />
-
         <Route
           path='/generate'
-          element={userData ? <Generate /> : <Navigate to='/' replace />}
+          element={
+            <ProtectedRoute isAllowed={!!userData}>
+              <Generate />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/editor/:id'
-          element={userData ? <Editor /> : <Navigate to='/' replace />}
+          element={
+            <ProtectedRoute isAllowed={!!userData}>
+              <Editor />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>

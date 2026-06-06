@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { serverurl } from '../config'
+import { serverurl } from '../config/axios'
 import Header from '../components/Header'
 import Chat from '../components/Chat'
 import {

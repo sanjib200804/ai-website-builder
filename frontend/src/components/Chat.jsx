@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { FaPaperPlane } from 'react-icons/fa'
-import { serverurl } from '../config'
+import { serverurl } from '../config/axios'
+
 
 const Chat = ({ website, setCode, messages, setMessages }) => {
   const [prompt, setPrompt] = useState('')

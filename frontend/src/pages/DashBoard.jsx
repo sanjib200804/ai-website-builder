@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { serverurl } from '../config'
+import { serverurl } from '../config/axios'
+
 
 const DashBoard = () => {
   const navigate = useNavigate()

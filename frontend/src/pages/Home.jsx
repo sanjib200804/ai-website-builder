@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Sparkles, Code2, Layout, Zap, ArrowRight } from 'lucide-react'
 import LoginModel from '../components/LoginModel'
 import { useDispatch, useSelector } from 'react-redux'
-import { serverurl } from '../config'
+import { serverurl } from '../config/axios'
+
 import axios from 'axios'
 import { setUserData } from '../redux/userSlice'
 import { useNavigate } from 'react-router-dom'
@@ -44,7 +45,6 @@ const Home = () => {
       setOpenProfile(false)
       // window.location.reload()
       toast.success('Logout Successful')
-     
     } catch (error) {
       toast.error('Logout Unsuccessful')
       console.log(error)

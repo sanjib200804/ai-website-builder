@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { serverurl } from '../config'
+import { serverurl } from '../config/axios'
+
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
