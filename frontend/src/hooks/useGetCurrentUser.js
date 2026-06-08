@@ -14,7 +14,6 @@ export default function useGetCurrentUser () {
           withCredentials: true
         })
         dispatch(setUserData(response.data))
-        console.log(response.data)
       } catch (error) {
         console.log(error)
       }
