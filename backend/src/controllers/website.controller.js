@@ -1,4 +1,8 @@
-import { generateWithGemini } from '../config/aiModel.js'
+import {
+  generateWithDeepSeek,
+  generateWithGemini,
+  generateWithOpenai
+} from '../config/aiModel.js'
 
 import { User } from '../model/user.model.js'
 import Website from '../model/website.model.js'
@@ -187,7 +191,8 @@ export const generateWebsite = async (req, res) => {
 
     const finalPrompt = masterPrompt.replace('{USER_PROMPT}', prompt)
 
-    // const rawCode = await generateResponse(finalPrompt)
+    // const rawCode = await generateWithDeepSeek(finalPrompt)
+    // const rawCode = await generateWithOpenai(finalPrompt)
 
     const rawCode = await generateWithGemini(finalPrompt)
     const code = cleanAICode(rawCode)

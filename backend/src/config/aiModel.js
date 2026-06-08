@@ -23,7 +23,7 @@ export async function generateWithOpenai (prompt) {
     try {
       const response = await openAi.responses.create({
         model: 'gpt-5.5',
-        contents: prompt
+        input: prompt
       })
 
       return response.output_text
