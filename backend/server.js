@@ -21,6 +21,9 @@ app.use(
     credentials: true
   })
 )
+app.get('/', (req, res) => {
+  res.send('WebGenie Backend Running')
+})
 
 app.use('/api/auth', router)
 
