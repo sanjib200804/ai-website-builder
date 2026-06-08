@@ -3,12 +3,13 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBi6dxJ25Vb9SyTig9oHXy4LsxgB2O0jLo',
-  authDomain: 'aiwedsitebuilder.firebaseapp.com',
-  projectId: 'aiwedsitebuilder',
-  storageBucket: 'aiwedsitebuilder.firebasestorage.app',
-  messagingSenderId: '9500636402',
-  appId: '1:9500636402:web:65ca62fe0db77492c2cc6b'
+  apiKey: 'AIzaSyAHhkSoJ90HKkby_KIpfRb-C0ECjHfJyns',
+  authDomain: 'webgeineai.firebaseapp.com',
+  projectId: 'webgeineai',
+  storageBucket: 'webgeineai.firebasestorage.app',
+  messagingSenderId: '787663275941',
+  appId: '1:787663275941:web:c9cfebb8a0e73adab20a4c',
+  measurementId: 'G-THB6EQS333'
 }
 
 // Initialize Firebase

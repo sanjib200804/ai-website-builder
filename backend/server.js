@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
   cors({
-    origin: ['http://localhost:5174', 'https://webgenie-ai-u89a.onrender.com'],
+    origin: 'https://webgenie-ai-u89a.onrender.com',
     credentials: true
   })
 )
