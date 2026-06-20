@@ -16,7 +16,7 @@ const deepseek = new OpenAI({
 })
 
 // ===========================================================================Using OpenAi=============================================================================================
-export async function generateWithOpenai (prompt) {
+export async function generateWithOpenai(prompt) {
   const maxRetries = 3
 
   for (let i = 0; i < maxRetries; i++) {
@@ -41,13 +41,13 @@ export async function generateWithOpenai (prompt) {
 
 //================================================================================Gemini=================================================================================================
 
-export async function generateWithGemini (prompt) {
+export async function generateWithGemini(prompt) {
   const maxRetries = 3
 
   for (let i = 0; i < maxRetries; i++) {
     try {
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash',
         contents: prompt
       })
 
@@ -65,7 +65,7 @@ export async function generateWithGemini (prompt) {
 }
 
 /*=======================================================================================DeepSeek====================================================================================*/
-export async function generateWithDeepSeek (prompt) {
+export async function generateWithDeepSeek(prompt) {
   const response = await deepseek.chat.completions.create({
     model: 'deepseek-chat',
     messages: [

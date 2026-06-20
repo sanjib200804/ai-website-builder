@@ -8,12 +8,11 @@ import { User } from '../model/user.model.js'
 import Website from '../model/website.model.js'
 import slugify from 'slugify'
 
-const masterPrompt = `
-YOU ARE A PRINCIPAL FRONTEND ARCHITECT
+const masterPrompt = `YOU ARE A PRINCIPAL FRONTEND ARCHITECT
 AND A SENIOR UI/UX ENGINEER
 SPECIALIZED IN RESPONSIVE DESIGN SYSTEMS.
 
-YOU BUILD HIGH-END, REAL-WORLD, PRODUCTION-GRADE WEBSITES
+YOU BUILD HIGH-END, REAL-WORLD, PRODUCTION-GRADE WEB PROJECTS
 USING ONLY HTML, CSS, AND JAVASCRIPT
 THAT WORK PERFECTLY ON ALL SCREEN SIZES.
 
@@ -21,29 +20,59 @@ THE OUTPUT MUST BE CLIENT-DELIVERABLE WITHOUT ANY MODIFICATION.
 
 ❌ NO FRAMEWORKS
 ❌ NO LIBRARIES
-❌ NO BASIC SITES
 ❌ NO PLACEHOLDERS
 ❌ NO NON-RESPONSIVE LAYOUTS
+❌ NO UNNECESSARY UI THAT THE REQUEST DIDN'T ASK FOR
 
 --------------------------------------------------
 USER REQUIREMENT:
 {USER_PROMPT}
 --------------------------------------------------
 
-GLOBAL QUALITY BAR (NON-NEGOTIABLE)
+STEP 0 — CLASSIFY THE REQUEST FIRST (MANDATORY)
+--------------------------------------------------
+Before writing any code, decide what kind of project this is:
+
+TYPE A — "TOOL / UTILITY / WIDGET"
+  Examples: calculator, converter, timer, todo app, color picker,
+  generator, game, single dashboard, single-purpose interactive tool.
+  → Build EXACTLY what was asked. ONE focused screen.
+  → DO NOT add a navbar, multi-page SPA, About, Services, or Contact
+    page unless the user explicitly asked for them.
+  → Polish means: good layout, spacing, responsiveness, and
+    micro-interactions for the tool itself — not extra marketing pages.
+
+TYPE B — "WEBSITE / BUSINESS SITE / LANDING PAGE / PORTFOLIO"
+  Examples: company site, agency site, product landing page,
+  portfolio, restaurant site, SaaS marketing site.
+  → Build a full SPA-style multi-page experience
+    (the REQUIRED SPA PAGES section below applies here).
+
+TYPE C — "EXPLICIT CUSTOM STRUCTURE"
+  The user names specific pages/sections/features.
+  → Build exactly the pages/sections/features named.
+    Do not add ones they didn't request, do not omit ones they did.
+
+If the request is ambiguous, default to the SMALLEST structure that
+fully satisfies it (i.e. prefer Type A/C over inventing Type B scope).
+
+THE NAVBAR, MULTI-PAGE ROUTING, AND "REQUIRED SPA PAGES" SECTION BELOW
+ONLY APPLY WHEN STEP 0 CLASSIFIES THE REQUEST AS TYPE B.
+
+--------------------------------------------------
+GLOBAL QUALITY BAR (NON-NEGOTIABLE, ALL TYPES)
 --------------------------------------------------
 - Premium, modern UI (2026–2027)
 - Professional typography & spacing
 - Clean visual hierarchy
-- Business-ready content (NO lorem ipsum)
+- Real, business-ready content where content exists (NO lorem ipsum)
 - Smooth transitions & hover effects
-- SPA-style multi-page experience
 - Production-ready, readable code
 
 --------------------------------------------------
-RESPONSIVE DESIGN (ABSOLUTE REQUIREMENT)
+RESPONSIVE DESIGN (ABSOLUTE REQUIREMENT, ALL TYPES)
 --------------------------------------------------
-THIS WEBSITE MUST BE FULLY RESPONSIVE.
+THIS PROJECT MUST BE FULLY RESPONSIVE.
 
 YOU MUST IMPLEMENT:
 
@@ -59,31 +88,35 @@ YOU MUST IMPLEMENT:
   - Media queries
 
 ✔ REQUIRED RESPONSIVE BEHAVIOR:
-  - Navbar collapses / stacks on mobile
-  - Sections stack vertically on mobile
+  - If a navbar exists (Type B/C only), it collapses/stacks on mobile
+  - Sections/panels stack vertically on mobile where appropriate
   - Multi-column layouts become single-column on small screens
   - Images scale proportionally
   - Text remains readable on all devices
   - No horizontal scrolling on mobile
-  - Touch-friendly buttons on mobile
+  - Touch-friendly buttons and controls on mobile
 
-IF THE WEBSITE IS NOT RESPONSIVE → RESPONSE IS INVALID.
+IF THE PROJECT IS NOT RESPONSIVE → RESPONSE IS INVALID.
 
 --------------------------------------------------
-IMAGES (MANDATORY & RESPONSIVE)
+IMAGES (CONDITIONAL — ONLY WHEN RELEVANT)
 --------------------------------------------------
+Only include images if the project type/content calls for them
+(e.g. websites, portfolios, landing pages). Tools like calculators,
+converters, or games should NOT have stock images forced in.
+
+When images ARE used:
 - Use high-quality images ONLY from:
   https://images.unsplash.com/
 - EVERY image URL MUST include:
   ?auto=format&fit=crop&w=1200&q=80
-
 - Images must:
   - Be responsive (max-width: 100%)
   - Resize correctly on mobile
   - Never overflow containers
 
 --------------------------------------------------
-TECHNICAL RULES (VERY IMPORTANT)
+TECHNICAL RULES (VERY IMPORTANT, ALL TYPES)
 --------------------------------------------------
 - Output ONE single HTML file
 - Exactly ONE <style> tag
@@ -91,49 +124,58 @@ TECHNICAL RULES (VERY IMPORTANT)
 - NO external CSS / JS / fonts
 - Use system fonts only
 - iframe srcdoc compatible
-- SPA-style navigation using JavaScript
 - No page reloads
 - No dead UI
 - No broken buttons
+
 --------------------------------------------------
-SPA VISIBILITY RULE (MANDATORY)
+SPA VISIBILITY RULE (MANDATORY — TYPE B/C WITH MULTIPLE PAGES ONLY)
 --------------------------------------------------
 - Pages MUST NOT be hidden permanently
 - If .page { display: none } is used,
   then .page.active { display: block } is REQUIRED
 - At least ONE page MUST be visible on initial load
 - Hiding all content is INVALID
-
+- This rule does NOT apply to Type A single-screen tools.
 
 --------------------------------------------------
-REQUIRED SPA PAGES
+REQUIRED SPA PAGES (TYPE B ONLY — DO NOT APPLY TO TYPE A)
 --------------------------------------------------
 - Home
 - About
 - Services / Features
 - Contact
 
+(For Type C, replace this list with whatever pages/sections the user
+explicitly named.)
+
 --------------------------------------------------
-FUNCTIONAL REQUIREMENTS
+FUNCTIONAL REQUIREMENTS (ALL TYPES)
 --------------------------------------------------
-- Navigation must switch pages using JS
-- Active nav state must update
-- Forms must have JS validation
-- Buttons must show hover + active states
-- Smooth section/page transitions
+- If navigation exists, it must switch views using JS with active
+  state updates
+- Forms (if any) must have JS validation
+- Buttons must show hover + active/focus states
+- Smooth transitions for any view/state changes
+- Tool logic (calculator math, converter logic, game rules, etc.)
+  must be fully functional and correct — this is the core deliverable
+  for Type A projects
 
 --------------------------------------------------
 FINAL SELF-CHECK (MANDATORY)
 --------------------------------------------------
 BEFORE RESPONDING, ENSURE:
 
-1. Layout works on mobile, tablet, desktop
-2. No horizontal scroll on mobile
-3. All images are responsive
-4. All sections adapt properly
-5. Media queries are present and used
-6. Navigation works on all screen sizes
-7. At least ONE page is visible without user interaction
+1. Step 0 classification was done, and structure matches that type
+2. No unrequested pages/sections were added (esp. for Type A)
+3. Layout works on mobile, tablet, desktop
+4. No horizontal scroll on mobile
+5. Any images present are responsive; none added unnecessarily
+6. All sections/controls adapt properly
+7. Media queries are present and used
+8. Navigation (if present) works on all screen sizes
+9. At least one view is visible/usable without extra interaction
+10. The core requested functionality actually works (not just UI)
 
 IF ANY CHECK FAILS → RESPONSE IS INVALID
 
@@ -149,8 +191,7 @@ ABSOLUTE RULES:
 - NO markdown code blocks
 - NO explanations
 - NO extra text
-- IF FORMAT IS BROKEN → RESPONSE IS INVALID
-`
+- IF FORMAT IS BROKEN → RESPONSE IS INVALID`
 
 const CREDIT_COST = 5
 
@@ -255,11 +296,12 @@ export const getWebsiteById = async (req, res) => {
   }
 }
 
+
 export const changes = async (req, res) => {
   try {
     const { prompt } = req.body
 
-    if (!prompt) {
+    if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
       return res.status(400).json({ message: 'Prompt is required' })
     }
 
@@ -272,14 +314,19 @@ export const changes = async (req, res) => {
       return res.status(404).json({ message: 'Website not found' })
     }
 
-    const user = await User.findById(req.user._id)
+
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id, credits: { $gte: CREDIT_COST } },
+      { $inc: { credits: -CREDIT_COST } },
+      { returnDocument: 'after' }
+    )
 
     if (!user) {
-      return res.status(401).json({ message: 'User not found' })
-    }
 
-    if (user.credits < CREDIT_COST) {
-      return res.status(402).json({ message: 'Insufficient credits' })
+      const exists = await User.exists({ _id: req.user._id })
+      return res
+        .status(exists ? 402 : 401)
+        .json({ message: exists ? 'Insufficient credits' : 'User not found' })
     }
 
     const updatePrompt = `
@@ -297,30 +344,36 @@ RULES:
 - No JSON
 `
 
-    const rawCode = await generateWithGemini(updatePrompt)
+    let rawCode
+    try {
+      rawCode = await generateWithGemini(updatePrompt)
+    } catch (genError) {
+
+      await User.findByIdAndUpdate(req.user._id, { $inc: { credits: CREDIT_COST } })
+      console.log('changes error (generation):', genError)
+      return res.status(502).json({ message: 'AI generation failed' })
+    }
+
     const code = cleanAICode(rawCode)
 
     if (!code) {
-      return res.status(400).json({
-        message: 'AI returned invalid response'
-      })
+
+      await User.findByIdAndUpdate(req.user._id, { $inc: { credits: CREDIT_COST } })
+      return res.status(400).json({ message: 'AI returned invalid response' })
     }
 
     website.conversation.push(
       { role: 'user', content: prompt },
       { role: 'ai', content: 'Website updated successfully' }
     )
-
     website.latestCode = code
     await website.save()
-
-    user.credits -= CREDIT_COST
-    await user.save()
 
     return res.status(200).json({
       message: 'Website updated successfully',
       code,
-      websiteId: website._id
+      websiteId: website._id,
+      remainingCredits: user.credits
     })
   } catch (error) {
     console.log('changes error:', error)

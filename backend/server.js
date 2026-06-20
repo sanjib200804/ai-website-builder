@@ -15,15 +15,7 @@ connectDB()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(
-  cors({
-    origin: 'https://webgenie-ai-u89a.onrender.com',
-    credentials: true
-  })
-)
-app.get('/', (req, res) => {
-  res.send('WebGenie Backend Running')
-})
+app.use(cors({ origin: process.env.WEBGENIE_AI || 'http://localhost:5173', credentials: true }))
 
 app.use('/api/auth', router)
 
