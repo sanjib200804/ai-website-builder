@@ -7,7 +7,7 @@ const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: isProduction,
   sameSite: isProduction ? 'none' : 'lax',
-  maxAge: 1000 * 60 * 60 * 24 // 1 day
+  maxAge: 1000 * 60 * 60 * 24 * 7// 7 day
 }
 
 export async function googleAuth (req, res) {

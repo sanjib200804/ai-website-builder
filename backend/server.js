@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
-const allowedOrigins = [process.env.WEBGENIE_AI, "http://localhost:5173"];
+const allowedOrigins = [process.env.WEBGENIE_AI];
 connectDB();
 
 app.use(express.json());
